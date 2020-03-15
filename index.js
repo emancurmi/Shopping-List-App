@@ -32,6 +32,7 @@ function createiteminlist(itemName) {
     let item = LIST[LIST.length];
     let nextindex = item.id + 1;
     LIST.push({ id: nextindex, name: itemName, checked: false });
+    console.log(LIST);
 }
 
 function additem() {
