@@ -9,13 +9,13 @@ const LIST = [
 
 function renderitemhtml(item) {
     return `
-     <li id='${item.id}'>
-        <span class="shopping-item shopping-item ${item.checked}">${item.name}</span >
+     <li data-item-id='${item.id}'>        
+        <span class="shopping-item ${item.checked ? 'shopping-item__checked' : ''}">${item.name}</span >
         <div class="shopping-item-controls">
-            <button class="shopping-item-toggle">
+            <button class="js-item-toggle">
                 <span class="button-label">check</span>
             </button>
-            <button class="shopping-item-delete">
+            <button class="js-item-delete">
                 <span class="button-label">delete</span>
             </button>
         </div>
@@ -23,37 +23,66 @@ function renderitemhtml(item) {
 }
 
 function renderitemlist() {
+    let listhtml = "";
     for (let i = 0; i < LIST.length; i++) {
-        $('.js-shopping-list').append(renderitemhtml(LIST[i]));
+        listhtml += renderitemhtml(LIST[i])
     }
+    $('.js-shopping-list').html(listhtml);
 }
 
 function createiteminlist(itemName) {
-    let item = LIST[LIST.length];
+    let lastindex = LIST.length;
+    let item = LIST[lastindex - 1];
     let nextindex = item.id + 1;
+    console.log(nextindex);
     LIST.push({ id: nextindex, name: itemName, checked: false });
     console.log(LIST);
 }
 
+function getItemIdFromElement(item) {
+    return $(item).closest('li').data('item-id');
+}
+
+function finditeminlist(id) {
+    let index = -1;
+    for (let i = 0; i < LIST.length; i++) {
+        if (LIST[i].id == id) { index = i; }
+    }
+    return index;
+}
+
 function additem() {
-    console.log("Add Button Clicked");
-    $('#js-shopping-list-form').submit(function(event) {
+    $('#js-shopping-list-form').submit(function (event) {
         event.preventDefault();
-        const newitem = $('.js-shopping-list-entry').val();
+        const newitem = $('#js-shopping-list-entry').val();
         createiteminlist(newitem);
         renderitemlist();
     });
 }
 
 function checkitem() {
-    console.log("Check Button Clicked");
-    //$('.js-shopping-list').on('click', `.js-item-toggle`, event => {
-    //    const id = getItemIdFromElement(event.currentTarget);
-    //});
+    $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
+        const id = getItemIdFromElement(event.currentTarget);
+        let listindex = finditeminlist(id);
+        LIST[listindex].checked = !LIST[listindex].checked;
+        renderitemlist();
+    });
 }
 
 function removeitem() {
-    console.log("Remove Button Clicked");
+    $('.js-shopping-list').on('click', `.js-item-delete`, event => {
+        const id = getItemIdFromElement(event.currentTarget);
+        let listindex = finditeminlist(id);
+        LIST.splice(listindex, 1);
+        renderitemlist();
+    });
 }
 
-renderitemlist();
+function start() {
+    renderitemlist();
+    additem();
+    checkitem();
+    removeitem();
+}
+
+start();
