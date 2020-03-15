@@ -36,12 +36,12 @@ function createiteminlist(itemName) {
 
 function additem() {
     console.log("Add Button Clicked");
-    //$('#js-shopping-list-form').submit(function(event) {
-    //    event.preventDefault();
-    //    const newitem = $('.js-shopping-list-entry').val();
-    //    createiteminlist(newitem);
-    //    renderitemlist();
-    //});
+    $('#js-shopping-list-form').submit(function(event) {
+        event.preventDefault();
+        const newitem = $('.js-shopping-list-entry').val();
+        createiteminlist(newitem);
+        renderitemlist();
+    });
 }
 
 function checkitem() {
