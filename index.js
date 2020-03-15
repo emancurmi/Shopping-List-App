@@ -7,7 +7,7 @@ const LIST = [
     { id: 3, name: "bread", checked: false }
 ];
 
-function createitemhtml(item) {
+function renderitemhtml(item) {
     return `
      <li id='${item.id}'>
         <span class="shopping-item shopping-item ${item.checked}">${item.name}</span >
@@ -22,10 +22,38 @@ function createitemhtml(item) {
      </li >`;
 }
 
-function createitemlist() {
+function renderitemlist() {
     for (let i = 0; i < LIST.length; i++) {
-        ('.js-shopping-list').append(createitemhtml());
+        ('.js-shopping-list').append(renderitemhtml());
     }
 }
 
-createitemlist();
+function createiteminlist(itemName) {
+    let item = LIST[LIST.length];
+    let nextindex = item.id + 1;
+    STORE.push({ id: nextindex, name: itemName, checked: false });
+}
+
+function additem() {
+    console.log("Add Button Clicked");
+    $('#js-shopping-list-form').submit(function (event) {
+        event.preventDefault();
+        const newitem = $('.js-shopping-list-entry').val();
+        createiteminlist(newitem);
+        renderitemlist();
+    });
+}
+
+function checkitem() {
+    console.log("Check Button Clicked");
+    $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
+        const id = getItemIdFromElement(event.currentTarget);
+
+    });
+}
+
+function removeitem() {
+    console.log("Remove Button Clicked");
+}
+
+renderitemlist();
