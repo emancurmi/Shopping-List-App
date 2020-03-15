@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const LIST = [
     { id: 0, name: "apples", checked: false },
@@ -24,32 +24,31 @@ function renderitemhtml(item) {
 
 function renderitemlist() {
     for (let i = 0; i < LIST.length; i++) {
-        ('.js-shopping-list').append(renderitemhtml(LIST[i]));
+        $('.js-shopping-list').append(renderitemhtml(LIST[i]));
     }
 }
 
 function createiteminlist(itemName) {
     let item = LIST[LIST.length];
     let nextindex = item.id + 1;
-    STORE.push({ id: nextindex, name: itemName, checked: false });
+    LIST.push({ id: nextindex, name: itemName, checked: false });
 }
 
 function additem() {
     console.log("Add Button Clicked");
-    $('#js-shopping-list-form').submit(function(event) {
-        event.preventDefault();
-        const newitem = $('.js-shopping-list-entry').val();
-        createiteminlist(newitem);
-        renderitemlist();
-    });
+    //$('#js-shopping-list-form').submit(function(event) {
+    //    event.preventDefault();
+    //    const newitem = $('.js-shopping-list-entry').val();
+    //    createiteminlist(newitem);
+    //    renderitemlist();
+    //});
 }
 
 function checkitem() {
     console.log("Check Button Clicked");
-    $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
-        const id = getItemIdFromElement(event.currentTarget);
-
-    });
+    //$('.js-shopping-list').on('click', `.js-item-toggle`, event => {
+    //    const id = getItemIdFromElement(event.currentTarget);
+    //});
 }
 
 function removeitem() {
