@@ -25,7 +25,7 @@ function renderitemhtml(item) {
 function renderitemlist() {
     let listhtml = "";
     for (let i = 0; i < LIST.length; i++) {
-        listhtml += renderitemhtml(LIST[i])
+        listhtml += renderitemhtml(LIST[i]);
     }
     $('.js-shopping-list').html(listhtml);
 }
@@ -46,7 +46,7 @@ function getItemIdFromElement(item) {
 function finditeminlist(id) {
     let index = -1;
     for (let i = 0; i < LIST.length; i++) {
-        if (LIST[i].id == id) { index = i; }
+        if (LIST[i].id === id) { index = i; }
     }
     return index;
 }
