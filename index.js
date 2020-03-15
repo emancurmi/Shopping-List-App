@@ -24,7 +24,7 @@ function renderitemhtml(item) {
 
 function renderitemlist() {
     for (let i = 0; i < LIST.length; i++) {
-        ('.js-shopping-list').append(renderitemhtml());
+        ('.js-shopping-list').append(renderitemhtml(LIST[i]));
     }
 }
 
